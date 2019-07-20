@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MarketPulse</string>
     <string name="action_settings">Settings</string>
+
+    <string name="loading">Loading..</string>
+    <string name="please_wait">Please wait..</string>
 </resources>

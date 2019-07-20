@@ -18,6 +18,6 @@ public class MarketModule {
 
     @Provides
     MarketNames provideVehicle() {
-        return new MarketNames(new Criteria());
+        return new MarketNames(new ArrayList<>());
     }
 }

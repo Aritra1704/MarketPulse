@@ -3,22 +3,33 @@ package com.example.marketpulse.modules.data;
 import javax.inject.Inject;
 
 public class Criteria {
-    private int rpm = 10;
+    private String type;
+    private String text;
 
     @Inject
-    public Criteria(){
-        this.rpm = 10;
+    public Criteria(){}
+
+    public String getType() {
+        return type;
     }
 
-    public int getRpm(){
-        return rpm;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void accelerate(int value){
-        rpm = rpm + value;
+    public String getText() {
+        return text;
     }
 
-    public void brake(){
-        rpm = 0;
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "Criteria{" +
+                "type='" + type + '\'' +
+                ", text='" + text + '\'' +
+                '}';
     }
 }
