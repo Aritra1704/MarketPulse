@@ -171,4 +171,5 @@
     <dimen name="t_64">64sp</dimen>
     <dimen name="t_65">65sp</dimen>
     <dimen name="t_67">67sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

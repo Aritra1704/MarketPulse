@@ -2,7 +2,7 @@ package com.example.marketpulse.modules.data;
 
 import javax.inject.Inject;
 
-public class Criteria {
+public class Criteria extends BaseDO  {
     private String type;
     private String text;
 

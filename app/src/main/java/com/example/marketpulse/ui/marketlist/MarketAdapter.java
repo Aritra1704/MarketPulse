@@ -1,6 +1,7 @@
-package com.example.marketpulse.ui;
+package com.example.marketpulse.ui.marketlist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.arpaul.utilitieslib.StringUtils;
 import com.example.marketpulse.R;
 import com.example.marketpulse.modules.data.MarketNames;
+import com.example.marketpulse.ui.criteriadetail.CriteriaDetailActivity;
 
 import java.util.List;
 
@@ -69,7 +70,9 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VariantHol
         holder.myView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                holder.tvVariantName.performLongClick();
+                Intent intent = new Intent(context, CriteriaDetailActivity.class);
+                intent.putExtra("Criteria", marketName);
+                context.startActivity(intent);
             }
         });
     }
@@ -77,9 +80,5 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VariantHol
     @Override
     public int getItemCount() {
         return marketNames.size();
-    }
-
-    public interface selectedVariant {
-        public void selected(String selected);
     }
 }

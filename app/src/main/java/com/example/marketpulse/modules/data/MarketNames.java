@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class MarketNames {
+public class MarketNames extends BaseDO {
     private int id;
     private String name;
     private String tag;
     private String color;
-    private ArrayList<Criteria> criterias;
+    private ArrayList<Criteria> criteria;
 
     @Inject
     public MarketNames(ArrayList<Criteria> criterias){
-        this.criterias = criterias;
+        this.criteria = criterias;
     }
 
     public int getId() {
@@ -48,12 +48,12 @@ public class MarketNames {
         this.color = color;
     }
 
-    public ArrayList<Criteria> getCriterias() {
-        return criterias;
+    public ArrayList<Criteria> getCriteria() {
+        return criteria;
     }
 
-    public void setCriterias(ArrayList<Criteria> criterias) {
-        this.criterias = criterias;
+    public void setCriteria(ArrayList<Criteria> criteria) {
+        this.criteria = criteria;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class MarketNames {
                 ", name='" + name + '\'' +
                 ", tag='" + tag + '\'' +
                 ", color='" + color + '\'' +
-                ", criterias=" + criterias +
+                ", criteria=" + criteria +
                 '}';
     }
 }

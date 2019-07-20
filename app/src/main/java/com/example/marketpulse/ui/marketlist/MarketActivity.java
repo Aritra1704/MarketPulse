@@ -1,4 +1,4 @@
-package com.example.marketpulse.ui;
+package com.example.marketpulse.ui.marketlist;
 
 import android.os.Bundle;
 
@@ -6,6 +6,7 @@ import com.arpaul.utilitieslib.NetworkUtility;
 import com.example.marketpulse.R;
 import com.example.marketpulse.modules.AppComponent;
 import com.example.marketpulse.modules.data.MarketNames;
+import com.example.marketpulse.ui.BaseActivity;
 import com.example.marketpulse.viewmodel.MarketVM;
 
 import androidx.lifecycle.ViewModelProviders;
