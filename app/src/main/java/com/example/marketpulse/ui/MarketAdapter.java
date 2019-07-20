@@ -21,7 +21,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VariantHol
     private Context context;
     private List<MarketNames> marketNames;
 
-//    private VariantVM variantVM;
+//    private MarketVM variantVM;
 
     public class VariantHolder extends RecyclerView.ViewHolder {
 
@@ -51,7 +51,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VariantHol
         this.context = context;
         this.marketNames = users;
 
-//        variantVM = ViewModelProviders.of((AppCompatActivity) context).get(VariantVM.class);
+//        variantVM = ViewModelProviders.of((AppCompatActivity) context).get(MarketVM.class);
     }
 
     @Override

@@ -2,25 +2,23 @@ package com.example.marketpulse.ui;
 
 import android.os.Bundle;
 
+import com.arpaul.utilitieslib.NetworkUtility;
 import com.example.marketpulse.R;
-import com.example.marketpulse.common.AppInstance;
 import com.example.marketpulse.modules.AppComponent;
-import com.example.marketpulse.ui.BaseActivity;
-import com.example.marketpulse.webservices.RetrofitService;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.marketpulse.modules.data.MarketNames;
+import com.example.marketpulse.viewmodel.MarketVM;
 
-import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import javax.inject.Inject;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,13 +27,17 @@ public class MarketActivity extends BaseActivity {
 
     private View vMarketActivity;
 
+    @BindView(R.id.tvNoData)
+    protected TextView tvNoData;
+
     @BindView(R.id.rvMarket)
     protected RecyclerView rvMarket;
 
     private AppComponent component;
 
-    @Inject
-    RetrofitService apiCall;
+    private MarketVM variantVM;
+    private ArrayList<MarketNames> listMarket;
+    private MarketAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,41 @@ public class MarketActivity extends BaseActivity {
 
         setSupportActionBar(toolbar);
 
-        ((AppInstance) getApplicationContext()).getComponent().inject(this);
+        if(!NetworkUtility.isConnectionAvailable(this)) {
+            tvNoData.setText("No Internet");
+            rvMarket.setVisibility(View.GONE);
+            tvNoData.setVisibility(View.VISIBLE);
+        } else {
+            tvNoData.setVisibility(View.GONE);
+            rvMarket.setVisibility(View.VISIBLE);
+            initializeVM();
+        }
+
 
     }
 
+    void initializeVM() {
+        variantVM = ViewModelProviders.of(this).get(MarketVM.class);
+        variantVM.init();
+        variantVM.getMarketNames().observe(this, markets -> {
+            if(markets != null) {
+                listMarket = markets;
+                Log.d("getMarketNames", listMarket.size() + "");
+
+                if(listMarket != null && listMarket.size() > 0) {
+                    adapter.refresh(listMarket);
+                }
+            }
+        });
+
+        setAdapter();
+    }
+
+    private void setAdapter() {
+        adapter = new MarketAdapter(this, new ArrayList<MarketNames>());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        rvMarket.setLayoutManager(mLayoutManager);
+        rvMarket.setItemAnimator(new DefaultItemAnimator());
+        rvMarket.setAdapter(adapter);
+    }
 }
