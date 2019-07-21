@@ -30,7 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/m_20"
-            android:onClick="onCrustChange"
             android:hint="Select"
             android:textSize="@dimen/t_18"
             android:textStyle="italic" />

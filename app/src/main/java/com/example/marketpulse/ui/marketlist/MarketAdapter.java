@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.arpaul.utilitieslib.ColorUtils;
 import com.example.marketpulse.R;
 import com.example.marketpulse.modules.data.MarketNames;
 import com.example.marketpulse.ui.criteriadetail.CriteriaDetailActivity;
@@ -67,6 +68,11 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VariantHol
         MarketNames marketName = marketNames.get(position);
         holder.tvMarketName.setText(marketName.getName());
         holder.tvMarketTag.setText(marketName.getTag());
+        if(marketName.getColor().equalsIgnoreCase("green"))
+            holder.tvMarketTag.setTextColor(ColorUtils.getColor(context, R.color.colorGreen));
+        else if(marketName.getColor().equalsIgnoreCase("red"))
+            holder.tvMarketTag.setTextColor(ColorUtils.getColor(context, R.color.colorRed));
+
         holder.myView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -3,11 +3,13 @@ package com.example.marketpulse.ui.criteriadetail;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.arpaul.utilitieslib.ColorUtils;
 import com.example.marketpulse.R;
 import com.example.marketpulse.modules.data.Criteria;
 import com.example.marketpulse.modules.data.MarketNames;
@@ -26,6 +28,12 @@ public class CriteriaDetailActivity extends BaseActivity {
     @BindView(R.id.rvCriteria)
     protected RecyclerView rvCriteria;
 
+    @BindView(R.id.tvCriteriaName)
+    protected TextView tvCriteriaName;
+
+    @BindView(R.id.tvCriteriaTag)
+    protected TextView tvCriteriaTag;
+
     private CriteriaAdapter adapter;
 
     @Override
@@ -38,6 +46,13 @@ public class CriteriaDetailActivity extends BaseActivity {
         if(getIntent().hasExtra("Criteria")) {
             marketName = (MarketNames) getIntent().getExtras().get("Criteria");
         }
+
+        tvCriteriaName.setText(marketName.getName());
+        tvCriteriaTag.setText(marketName.getTag());
+        if(marketName.getColor().equalsIgnoreCase("green"))
+            tvCriteriaTag.setTextColor(ColorUtils.getColor(this, R.color.colorGreen));
+        else if(marketName.getColor().equalsIgnoreCase("red"))
+            tvCriteriaTag.setTextColor(ColorUtils.getColor(this, R.color.colorRed));
 
         setAdapter();
         adapter.refresh(marketName.getCriteria());
