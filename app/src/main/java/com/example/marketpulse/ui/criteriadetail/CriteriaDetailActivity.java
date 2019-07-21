@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +35,9 @@ public class CriteriaDetailActivity extends BaseActivity {
     @BindView(R.id.tvCriteriaTag)
     protected TextView tvCriteriaTag;
 
+    @BindView(R.id.llHeader)
+    protected CardView llHeader;
+
     private CriteriaAdapter adapter;
 
     @Override
@@ -43,12 +47,20 @@ public class CriteriaDetailActivity extends BaseActivity {
         llBase.addView(vCriteriaDetailActivity, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         ButterKnife.bind(this);
 
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         if(getIntent().hasExtra("Criteria")) {
             marketName = (MarketNames) getIntent().getExtras().get("Criteria");
         }
 
         tvCriteriaName.setText(marketName.getName());
         tvCriteriaTag.setText(marketName.getTag());
+        tvCriteriaTag.setVisibility(View.VISIBLE);
+        llHeader.setBackgroundColor(ColorUtils.getColor(this, R.color.colorNavyBlue));
+        tvCriteriaName.setTextColor(ColorUtils.getColor(this, R.color.colorWhite));
         if(marketName.getColor().equalsIgnoreCase("green"))
             tvCriteriaTag.setTextColor(ColorUtils.getColor(this, R.color.colorGreen));
         else if(marketName.getColor().equalsIgnoreCase("red"))

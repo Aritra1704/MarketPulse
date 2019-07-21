@@ -32,6 +32,7 @@
             android:layout_marginTop="@dimen/m_20"
             android:hint="Select"
             android:textSize="@dimen/t_18"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:visibility="gone" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
