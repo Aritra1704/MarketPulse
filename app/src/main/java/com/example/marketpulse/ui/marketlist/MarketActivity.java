@@ -56,6 +56,8 @@ public class MarketActivity extends BaseActivity {
         } else {
             tvNoData.setVisibility(View.GONE);
             rvMarket.setVisibility(View.VISIBLE);
+
+            showLoader(false, "");
             initializeVM();
         }
 
@@ -66,6 +68,7 @@ public class MarketActivity extends BaseActivity {
         variantVM = ViewModelProviders.of(this).get(MarketVM.class);
         variantVM.init();
         variantVM.getMarketNames().observe(this, markets -> {
+            hideLoader();
             if(markets != null) {
                 listMarket = markets;
                 Log.d("getMarketNames", listMarket.size() + "");
